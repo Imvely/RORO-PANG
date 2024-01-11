@@ -1,16 +1,25 @@
 # Wetube Reloaded
 
-/ -> Home
-/join -> Join
-/login -> Login
-/search -> Search
-
-/users/:id -> See User
-/users/logout -> Log Out
-/users/edit -> Edit My Profile
-/users/remove -> Delete My Profile
-
-/videos/:id -> See Video
-/videos/:id/edit -> Edit Video
-/videos/:id/delete -> Delete Video
-/videos/upload -> Upload Video
+📦src
+ ┣ 📂controllers
+ ┃ ┣ 📜userController.js
+ ┃ ┗ 📜videoController.js
+ ┣ 📂models
+ ┃ ┗ 📜Video.js
+ ┣ 📂routers
+ ┃ ┣ 📜globalRouter.js
+ ┃ ┣ 📜userRouter.js
+ ┃ ┗ 📜videoRouter.js
+ ┣ 📂views
+ ┃ ┣ 📂mixins
+ ┃ ┃ ┗ 📜video.pug
+ ┃ ┣ 📂partials
+ ┃ ┃ ┗ 📜footer.pug
+ ┃ ┣ 📜base.pug
+ ┃ ┣ 📜edit.pug
+ ┃ ┣ 📜home.pug
+ ┃ ┣ 📜upload.pug
+ ┃ ┗ 📜watch.pug
+ ┣ 📜db.js
+ ┣ 📜init.js
+ ┗ 📜server.js
