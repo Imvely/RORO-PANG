@@ -1,13 +1,14 @@
-# Wetube Reloaded
-
+# Wetube Reloaded  
+  
 📦src  
  ┣ 📂controllers  
  ┃ ┣ 📜userController.js  
  ┃ ┗ 📜videoController.js  
  ┣ 📂models  
+ ┃ ┣ 📜User.js  
  ┃ ┗ 📜Video.js  
  ┣ 📂routers  
- ┃ ┣ 📜globalRouter.js  
+ ┃ ┣ 📜rootRouter.js  
  ┃ ┣ 📜userRouter.js  
  ┃ ┗ 📜videoRouter.js  
  ┣ 📂views  
@@ -15,11 +16,14 @@
  ┃ ┃ ┗ 📜video.pug  
  ┃ ┣ 📂partials  
  ┃ ┃ ┗ 📜footer.pug  
+ ┃ ┣ 📜404.pug  
  ┃ ┣ 📜base.pug  
  ┃ ┣ 📜edit.pug  
  ┃ ┣ 📜home.pug  
+ ┃ ┣ 📜join.pug  
+ ┃ ┣ 📜search.pug  
  ┃ ┣ 📜upload.pug  
- ┃ ┗ 📜watch.pug   
+ ┃ ┗ 📜watch.pug  
  ┣ 📜db.js  
  ┣ 📜init.js  
  ┗ 📜server.js  
