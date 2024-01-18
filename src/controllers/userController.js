@@ -204,7 +204,44 @@ export const getEdit = (req, res) => {
   return res.render("edit-profile", { pageTitle: "Edit Profile" });
 };
 
-export const postEdit = (req, res) => {};
+export const postEdit = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { email, username, name, location },
+  } = req;
+
+  const findUsername = await User.findOne({ username });
+  const findEmail = await User.findOne({ email });
+
+  // console.log("findUsername: ", findUsername?._id.toString());
+  // console.log("findEmail: ", findEmail?._id.toString());
+  // console.log("_id: ", _id);
+
+  if (
+    (findUsername && findUsername._id.toString() !== _id) ||
+    (findEmail && findEmail._id.toString() !== _id)
+  ) {
+    return res.render("edit-profile", {
+      pageTitle: "Edit Profile",
+      errorMessage: "User is exist",
+    });
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      name,
+      email,
+      username,
+      location,
+    },
+    { new: true }
+  );
+  req.session.user = updatedUser;
+  return res.redirect("/users/edit");
+};
 export const remove = (req, res) => res.send("Remove User");
 export const logout = (req, res) => {
   req.session.destroy();
