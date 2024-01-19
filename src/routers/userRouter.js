@@ -15,7 +15,7 @@ import {
 import {
   protectorMiddleware,
   publicOnlyMiddleware,
-  uploadFiles,
+  avatarUploadFiles,
 } from "../middlewares";
 
 const userRouter = express.Router();
@@ -25,7 +25,7 @@ userRouter
   .route("/edit")
   .all(protectorMiddleware)
   .get(getEdit)
-  .post(uploadFiles.single("avatar"), postEdit);
+  .post(avatarUploadFiles.single("avatar"), postEdit);
 userRouter
   .route("/change-password")
   .all(protectorMiddleware)
@@ -36,6 +36,6 @@ userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
 userRouter.get("/kakao/start", publicOnlyMiddleware, startKakaoLogin);
 userRouter.get("/kakao/finish", publicOnlyMiddleware, finishKakaoLogin);
-userRouter.get(":id", see);
+userRouter.get("/:id", see);
 
 export default userRouter;
