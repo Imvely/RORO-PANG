@@ -11,10 +11,9 @@ module.exports = {
     }),
   ],
   output: {
-    filename: "main.js",
-    path: path.resolve(__dirname, "assets", "js"),
     filename: "js/main.js",
     path: path.resolve(__dirname, "assets"),
+    clean: true,
   },
   module: {
     rules: [
