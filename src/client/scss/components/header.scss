@@ -6,7 +6,14 @@ header {
     .header__logo {
       color: $red;
       font-size: 50px;
+      #fontlogo {
+        color: $red;
+        font-size: 35px;
+        font-weight: bold;
+        display: none;
+      }
     }
+    
     ul {
       display: flex;
       justify-content: space-between;

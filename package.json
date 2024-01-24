@@ -1,10 +1,10 @@
 {
-  "name": "wetube",
+  "name": "roropang",
   "version": "1.0.0",
   "description": "The best way to watch videos.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Imvely/wetube-reloaded.git"
+    "url": "git+https://github.com/Imvely/RORO-PANG.git"
   },
   "scripts": {
     "dev:server": "nodemon",

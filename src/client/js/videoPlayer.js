@@ -18,6 +18,9 @@ let volumeValue = 0.5;
 video.volume = volumeValue;
 
 const handlePlayClick = (e) => {
+  //watch 사이트 진입 || reload시 플레이어 자동 재생
+  //멈추면 재생 아이콘 뜨기 개발
+  //재생하면 일시정지 아이콘 뜨기
   if (video.paused) {
     video.play();
   } else {
@@ -27,6 +30,7 @@ const handlePlayClick = (e) => {
 };
 
 const handleMuteClick = (e) => {
+  //음소거시 음소거 아이콘 1초 노출
   video.muted = !video.muted;
   muteBtnIcon.classList = video.muted
     ? "fas fa-volume-mute"
@@ -96,7 +100,6 @@ const handleMouseLeave = () => {
   constrolsTimeout = setTimeout(hideControls, 3000);
 };
 
-//고쳐보기!! 화면 누를때 멈추기
 const handleKeyboard = (event) => {
   const keyBoardInput = event.key;
   if (keyBoardInput === " ") {
@@ -137,12 +140,21 @@ const handleKeyboard = (event) => {
 //   }
 // });
 
+const handleEnded = () => {
+  const { id } = videoContainer.dataset;
+  fetch(`/api/videos/${id}/view`, {
+    method: "POST",
+  });
+  //00초로 플레이어 돌아오게 만들기 & 다음 영상 노출 및 되돌아가기 아이콘 노출
+};
+
 video.addEventListener("click", handlePlayClick);
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click", handleMuteClick);
 volumeRange.addEventListener("input", handleVolumeChange);
 video.addEventListener("loadeddata", handleLoadedMetadata);
 video.addEventListener("timeupdate", handleTimeUpdate);
+video.addEventListener("ended", handleEnded);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
