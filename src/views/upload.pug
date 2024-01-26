@@ -5,12 +5,14 @@ block content
         button#showPreviewBtn Show Video Preview
         div#previewDiv(style="display: none;")
             video#preview
-            button#startBtn Start Recording
+            button#actionBtn Start Recording
     if errorMessage 
         span=errorMessage
     form(method="POST", enctype="multipart/form-data")
         label(for="video") Video File
         input(type="file", id="video", name="video", accept="video/*", required)
+        label(for="thumb") Thumbnail File
+        input(type="file", id="thumb", name="thumb", accept="image/*", required)
         input(placeholder="Title", required, type="text", name="title", maxlength=80)
         input(placeholder="Description", required, type="text", name="description", minlength=20)
         input(placeholder="Hashtags, separated by comma.", required, type="text", name="hashtags")
@@ -19,24 +21,5 @@ block content
 block scripts 
     script(src="/static/js/recorder.js")
 
-    script.
-        document.addEventListener('DOMContentLoaded', function() {
-            var showPreviewBtn = document.getElementById('showPreviewBtn');
-            var previewDiv = document.getElementById('previewDiv');
-            var isPreviewShown = false;
-
-            showPreviewBtn.addEventListener('click', function() {
-                if (isPreviewShown) {
-                    // 버튼 텍스트를 다시 변경하고 div를 숨깁니다.
-                    showPreviewBtn.innerText = 'Show Video Preview';
-                    previewDiv.style.display = 'none';
-                    isPreviewShown = false;
-                } else {
-                    // 버튼 텍스트를 변경하고 div를 보이게 합니다.
-                    showPreviewBtn.innerText = 'Hide Video Preview';
-                    previewDiv.style.display = 'block';
-                    isPreviewShown = true;
-                }
-            });
-        });
+    
 
