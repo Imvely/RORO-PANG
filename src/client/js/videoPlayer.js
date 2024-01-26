@@ -1,4 +1,4 @@
-const video = document.querySelector("video");
+const video = document.getElementById("preview");
 const playBtn = document.getElementById("play");
 const playBtnIcon = playBtn.querySelector("i");
 const muteBtn = document.getElementById("mute");
