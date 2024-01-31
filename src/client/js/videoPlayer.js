@@ -32,6 +32,7 @@ const handlePlayClick = (e) => {
 const handleMuteClick = (e) => {
   //음소거시 음소거 아이콘 1초 노출
   video.muted = !video.muted;
+  console.log(video.muted);
   muteBtnIcon.classList = video.muted
     ? "fas fa-volume-mute"
     : "fas fa-volume-up";
@@ -100,31 +101,58 @@ const handleMouseLeave = () => {
   constrolsTimeout = setTimeout(hideControls, 3000);
 };
 
-const handleKeyboard = (event) => {
-  const keyBoardInput = event.key;
-  if (keyBoardInput === " ") {
-    event.preventDefault();
-    return handlePlayClick();
+const handleKeydown = (event) => {
+  console.log(event.target.id); 
+  if (event.target.id === "textarea") {
+  return;
   }
-  if (
-    keyBoardInput === "Enter" ||
-    keyBoardInput === "f" ||
-    keyBoardInput === "F"
-  ) {
-    return handleFullscreen();
+  switch (event.keyCode) {
+  case 77:
+  handleMuteClick(); // mute
+  break;
+  case 70:
+  handleFullscreen(); // fullscreen
+  break;
+  
+  case 37:
+  video.currentTime -= 5; // ⬅️
+  break;
+  case 39:
+  video.currentTime += 5; // ➡️
+  break;
+  case 38:
+    console.log(volumeValue);
+  if (volumeValue > 1) {
+    break;
   }
-  if (keyBoardInput === "m" || keyBoardInput === "M") {
-    return handleMuteClick();
+  volumeValue += 0.1; // ⬆️
+  volumeRange.value = volumeValue;
+  video.volume = volumeRange.value;
+  event.preventDefault();
+  if (volumeValue > 0.1) {
+    console.log(volumeValue);
+    muteBtnIcon.classList = "fas fa-volume-up";
   }
-  if (keyBoardInput === "ArrowRight") {
-    event.preventDefault();
-    return (video.currentTime += 5);
+  break;
+  case 40:
+    if (volumeValue <= 0.01) {
+      break;
+    }
+  volumeValue -= 0.1; // ⬇️
+  volumeRange.value = volumeValue;
+  video.volume = volumeRange.value;
+  event.preventDefault();
+  if (volumeValue <= 0.1) {
+    console.log(volumeValue);
+    muteBtnIcon.classList = "fas fa-volume-mute";
   }
-  if (keyBoardInput === "ArrowLeft") {
-    event.preventDefault();
-    return (video.currentTime -= 5);
+  break;
+  case 32:
+  handlePlayClick(); // spacebar
+  event.preventDefault(); // prevent scroll down
+  break;
   }
-};
+  };
 
 //스페이스바를 누르면 멈춤 PLAY/PAUSE
 // document.addEventListener("keyup", (event) => {
@@ -159,4 +187,4 @@ videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullscreen);
-window.addEventListener("keydown", handleKeyboard);
+window.addEventListener("keydown", handleKeydown);
